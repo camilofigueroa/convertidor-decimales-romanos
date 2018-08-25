@@ -1,7 +1,6 @@
 /**
  * Autor: Camilo Figueroa ( Crivera )
  * Fecha: 28/08/2018
- * 
  */
 
 var g_contenedor_salida = "";
@@ -49,13 +48,16 @@ function operar()
     var salida = "";
     var tmp_num = 0;
     var tmp_num_adelanto = 0;
+    var contador = 0; //Variable para hacer repeticiones por cifra de los números. 
 
     //console.log( "Salida " + salida );
 
     //Este ciclo es tentativo, que haga las cosas algunas veces. Cuando se ataquen todas las cifras...
     //...del número y quede en cero, este ciclo será un while.
-    for( j = 0; j < 10; j ++ ) 
-    {
+    //for( j = 0; j < 10; j ++ ) //Antes 25/08/2018
+    while( numero != 0 && contador < 1000 ) //Mientras el número sea diferente de cero 
+    {                                       //es porque todavía tiene cifras que operar.
+                                            //De igual forma, el contador es un seguro para que salga del While.
         console.log( "Ini ciclo ---- " + numero + " ------ " );
 
         for( i = 0; i < g_arreglo.length; i ++ )
@@ -104,7 +106,10 @@ function operar()
 
             //salida = salida.replace( g_arreglo[ i ][ 0 ], g_arreglo[ i ][ 1 ] );   
         }
-    }
+
+        contador ++;
+
+    } //Fin while
 
     console.log( "----------------" );
 
