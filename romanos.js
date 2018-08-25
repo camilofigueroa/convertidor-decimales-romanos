@@ -33,6 +33,7 @@ window.onload = function()
  */
 function al_dar_clic()
 {
+    //console.log( ( "85" ).substr( 0, 1 ) );
     console.log( "El número a convertir es: " + g_texto_original.value )
     salida.innerHTML = "Su n&uacute;mero en romano es: " + operar();
 }
@@ -63,7 +64,8 @@ function operar()
             console.log( tmp_num + " " + g_arreglo[ i ][ 1 ] ); //Análisis.
             
             //Parece ser que un buen candidato de número es el que está entre 0.8 y 1.
-            if( tmp_num >= 0.8 && tmp_num < 1 && ( numero == 4 || numero % 4 != 0 ) )
+            //Ojo, los que empiezan con 8 han causado muchos problemas.
+            if( tmp_num >= 0.8 && tmp_num < 1 && ( numero + "" ).substr( 0, 1 ) != 8 )
             {   //Aquí el número que importa es el anterior o anteriores a la cifra encontrada.
                 tmp_num_adelanto = g_arreglo[ i ][ 2 ];
                 salida += g_arreglo[ i + tmp_num_adelanto ][ 1 ] + g_arreglo[ i ][ 1 ];
@@ -89,7 +91,7 @@ function operar()
             }
 
             //Estos son los números de 2 o 3 cifras que no están en el vector. II III XX XXX CC CCC 
-            if( tmp_num >= 2 && tmp_num <= 3.4 )
+            if( tmp_num >= 2 && tmp_num < 4 )
             { 
                 for( k = 1; k <= tmp_num; k ++ ) 
                 {
