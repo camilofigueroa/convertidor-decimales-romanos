@@ -4,17 +4,18 @@
  * 
  */
 
-
 var g_contenedor_salida = "";
 var g_texto_original = "";
 
 //Ojo, de primera mano el órden importa.
-var g_arreglo = [   [ "500", "D" ],
-                    [ "100", "C" ],                    
-                    [ "50", "L" ],
-                    [ "10", "X" ],
-                    [ "5", "V" ],
-                    [ "1", "I" ]                    
+//La tercera columna me indica cuantas casillas debo ir adelante en el orden del vector
+//para convertir un numero que en romano usará cifras anteriores.
+var g_arreglo = [   [ "500", "D", 1 ],
+                    [ "100", "C", 2 ],                    
+                    [ "50",  "L", 1 ],
+                    [ "10",  "X", 2 ],
+                    [ "5",   "V", 1 ],
+                    [ "1",   "I", 0 ]                    
                 ];
 
 /**
@@ -40,16 +41,44 @@ function al_dar_clic()
  */
 function operar()
 {
-    var i = 0;
+    var i = 0, j = 0;  //j es para un segundo ciclo.
     var numero = g_texto_original.value * 1;
-    var salida = g_texto_original.value;
-    
+    var salida = "";
+    var tmp_num = 0;
+    var tmp_num_adelanto = 0;
+
     //console.log( "Salida " + salida );
 
-    for( i = 0; i < g_arreglo.length; i ++ )
+    //Este ciclo es tentativo, que haga las cosas algunas veces. Cuando se ataquen todas las cifras...
+    //...del número y quede en cero, este ciclo será un while.
+    for( j = 0; j < 3; j ++ ) 
     {
-        console.log( ( numero / ( g_arreglo[ i ][ 0 ] * 1 ) ) + " " + g_arreglo[ i ][ 1 ] );
-        salida = salida.replace( g_arreglo[ i ][ 0 ], g_arreglo[ i ][ 1 ] );   
+        console.log( "Ini ciclo ---- " + numero + " ------ " );
+
+        for( i = 0; i < g_arreglo.length; i ++ )
+        {
+            tmp_num = ( numero / ( g_arreglo[ i ][ 0 ] * 1 ) );
+            console.log( tmp_num + " " + g_arreglo[ i ][ 1 ] ); //Análisis.
+            
+            //Parece ser que un buen candidato de número es el que está entre 0.8 y 1.
+            if( tmp_num >= 0.8 && tmp_num < 1 )
+            {   //Aquí el número que importa es el anterior o anteriores a la cifra encontrada.
+                tmp_num_adelanto = g_arreglo[ i ][ 2 ];
+                salida += g_arreglo[ i + tmp_num_adelanto ][ 1 ] + g_arreglo[ i ][ 1 ];
+                numero = numero - (( g_arreglo[ i ][ 0 ] * 1 ) - ( g_arreglo[ i + tmp_num_adelanto ][ 0 ] * 1 ));
+                console.log("   -> " + numero );
+                break; 
+            }
+
+            if( tmp_num == 1 ) //Ojo, encontró el número exacto.
+            {
+                salida = g_arreglo[ i ][ 1 ];
+                numero = numero - ( g_arreglo[ i ][ 0 ] * 1 );
+                break; //Hay que detener el ciclo porque encontró el número exacto.
+            }
+
+            //salida = salida.replace( g_arreglo[ i ][ 0 ], g_arreglo[ i ][ 1 ] );   
+        }
     }
 
     console.log( "----------------" );
