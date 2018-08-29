@@ -5,6 +5,8 @@
  */
 package decaromanos;
 
+import java.util.Scanner; //PAra leer por teclado hay que importar esto
+
 /**
  *
  * @author SENA
@@ -17,7 +19,11 @@ public class DecARomanos {
     public static void main(String[] args) {
         // TODO code application logic here
         
-        String numero_para_convertir = "50";
+        Scanner leyendo = new Scanner( System.in );
+        
+        System.out.println( "Digite el número a convertir: " );
+        System.out.println( "Debe escribir el número abajo en la consola Output debajo de etse mensaje... " );
+        String numero_para_convertir = leyendo.next();
         
         //Se ha creado la clase en otro archivo, ya es momento de organizar esto.
         Convertidora obj_convert = new Convertidora();
