@@ -17,8 +17,12 @@ public class DecARomanos {
     public static void main(String[] args) {
         // TODO code application logic here
         
+        //Se ha creado la clase en otro archivo, ya es momento de organizar esto.
+        Convertidora obj_convert = new Convertidora();
+        System.out.println( obj_convert.dec_a_roman() ); 
+        
         int i = 0;
-        String salida = "10";
+        String salida = "10"; //Aquí ingresa tu número.
         
         String[][] g_arreglo = { 
                                     { "500", "D" }, 
