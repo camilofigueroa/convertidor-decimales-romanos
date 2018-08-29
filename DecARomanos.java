@@ -5,7 +5,7 @@
  */
 package decaromanos;
 
-import java.util.Scanner; //PAra leer por teclado hay que importar esto
+import java.util.Scanner; //Para leer por teclado hay que importar esto
 
 /**
  *
