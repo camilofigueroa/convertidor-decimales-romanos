@@ -12,10 +12,28 @@ package decaromanos;
 public class Convertidora {
     
     
-    public String dec_a_roman()
+    public String dec_a_roman( String cadena_numero )
     {
         
-     return "Funciona";   
+        String salida = cadena_numero;
+        
+        int i = 0;
+        
+        String[][] g_arreglo = { 
+                                    { "500", "D" }, 
+                                    { "100", "C" }, 
+                                    { "50", "L" },
+                                    { "10", "X" },
+                                    { "5", "V" },
+                                    { "1", "I" } 
+                                }; 
+        
+        for( i = 0; i < g_arreglo.length; i ++ )
+        {
+            salida = salida.replace(g_arreglo[ i ][ 0 ], g_arreglo[ i ][ 1 ]);
+        }
+        
+        return salida;   
     }  
     
     
